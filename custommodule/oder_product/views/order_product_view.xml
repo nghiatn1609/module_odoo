@@ -6,14 +6,14 @@
       <field name="model">purchase.request</field>
       <field name="arch" type="xml">
         <tree>
-          <field name="Department_id"/>
-          <field name="Request_id"/>
-          <field name="Approver_id"/>
-          <field name="Date"/>
-          <field name="Description"/>
-          <field name="Total_qty"/>
-          <field name="Total_Amount"/>
-          <field name="State"/>
+          <field name="department_id"/>
+          <field name="request_id"/>
+          <field name="approver_id"/>
+          <field name="date"/>
+          <field name="description"/>
+          <field name="total_qty"/>
+          <field name="total_Amount"/>
+          <field name="state"/>
         </tree>
       </field>
     </record>
