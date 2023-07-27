@@ -1,0 +1,27 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="oder_product.tree">
+      <field name="name">Oder Product list</field>
+      <field name="model">purchase.request</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="Department_id"/>
+          <field name="Request_id"/>
+          <field name="Approver_id"/>
+          <field name="Date"/>
+          <field name="Description"/>
+          <field name="Total_qty"/>
+          <field name="Total_Amount"/>
+          <field name="State"/>
+        </tree>
+      </field>
+    </record>
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="oder_product_list">
+      <field name="name">Oder Product</field>
+      <field name="res_model">purchase.request</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+  </data>
+</odoo>

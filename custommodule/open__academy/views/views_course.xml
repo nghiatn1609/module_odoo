@@ -1,0 +1,76 @@
+<odoo>
+  <data>
+    <!-- Course tree-->
+    <record id="open_academy_view_tree_course" model="ir.ui.view">
+      <field name="name">Open Academy list</field>
+      <field name="model">open_academy.course</field>
+      <field name="arch" type="xml">
+        <tree string="Course list">
+          <field name="title"/>
+          <field name="description"/>
+          <field name="responsible_id"/>
+          <field name="session_ids"/>
+        </tree>
+      </field>
+    </record>
+    <!-- Course form -->
+    <record id="open_academy_view_form_course" model="ir.ui.view">
+      <field name="name">Open Academy form</field>
+      <field name="model">open_academy.course</field>
+      <field name="arch" type="xml">
+        <form string="Course form">
+          <sheet>
+            <group name="Title" string="Title">
+              <group>
+                <field name="title"/>
+              </group>
+              <group>
+                <field name="description"/>
+              </group>
+              <!-- <group>
+                <field name="responsible_id"/>
+              </group> -->
+            </group>
+            <notebook>
+              <page name="name_3" string="Sessions">
+                <field name="session_ids" />
+              </page>
+              <page name="name_4" string="Responsible">
+                <field name="responsible_id"/>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+    <record id="open_academy_view_search" model="ir.ui.view">
+      <field name="name">open_academy.view.search</field>
+      <field name="model">open_academy.course</field>
+      <field name="arch" type="xml">
+        <search string="Course search">
+          <field name="title"/>
+          <field name="description"/>
+          <field name="responsible_id"/>
+          <!-- Thanh search view, domain là giá trị tìm kiếm tại vị trí của title, với giá trị là 'java' ( mặc định sẽ là uid,
+            muốn tìm giá trị nào thì thay đổi '') -->
+          <filter name="my_courses" string="My Courses"
+                        domain="[('title', '=', 'java')]"/>
+          <!-- dòng 41 (dòng bên trên) là thanh search view mặc định khi vừa vào trang -->
+          <!-- dòng 45 (dòng bên dưới) là thanh search giá trị cần tìm khi theo group by-->
+          <group string="Group By">
+            <filter name="by_responsible" string="Responsible"
+                            context="{'group_by': 'title'}"/>
+          </group>
+        </search>
+      </field>
+    </record>
+    <!-- actions opening views on models for Course-->
+    <record id="course_list_action" model="ir.actions.act_window">
+      <field name="name">Course</field>
+      <field name="res_model">open_academy.course</field>
+      <field name="view_mode">tree,form</field>
+      <!-- Action for Search view  -->
+      <!-- <field name="context" eval="{'search_default_my_courses': 1}"/> -->
+    </record>
+  </data>
+</odoo>

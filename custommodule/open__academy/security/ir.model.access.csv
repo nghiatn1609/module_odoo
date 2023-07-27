@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_open__academy_manager,open__academy.manaer,model_open_academy_course,group_open_academy_manager,1,1,1,1
+session_manager,session manager,model_open_academy_session,base.group_user,1,1,1,1
+access_open__academy_student,open__academy.student,model_open_academy_course,group_open_academy_student,1,0,0,0
