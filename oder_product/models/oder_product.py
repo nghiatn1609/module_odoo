@@ -31,16 +31,16 @@ class oder_product(models.Model):
         print("Gửi yêu cầu")
     
     def export_to_excel(self):
-        # Create a new Excel workbook and add a worksheet
+        # Tạo mới 1 file excel và worksheet
         workbook = xlsxwriter.Workbook('purchase_requests_1.xlsx')
         worksheet = workbook.add_worksheet()
 
-        # Write the headers
+        # Tạo tiêu đề
         headers = ['Request ID', 'Product ID', 'Quantity', 'Total Price']
         for col, header in enumerate(headers):
             worksheet.write(0, col, header)
 
-        # Write the data rows
+        # Các dòng
         row = 1
         for request in self.filtered(lambda r: r.state == 'approve'):
             for line in request.request_line_ids:
@@ -50,7 +50,7 @@ class oder_product(models.Model):
                 worksheet.write(row, 3, line.total)
                 row += 1
 
-        # Close the workbook
+        # Đóng file excel
         workbook.close()
     
     
