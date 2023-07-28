@@ -15,7 +15,6 @@ class oder_product_line(models.Model):
     qty_approve = fields.Float()
     total = fields.Float(string="Total", compute="_total")
     
-    # price_unit = fields.Float(string='Unit Price', compute='_compute_price_unit', store=True)
     
     @api.depends('product_id.list_price','qty')
     def _total(self):
@@ -23,11 +22,4 @@ class oder_product_line(models.Model):
             r.total =  r.qty * r.product_id.list_price
 
 
-    # @api.depends('product_id', 'product_id.seller_ids')
-    # def _compute_price_unit(self):
-    #     for line in self:
-    #         supplier_info = line.product_id.seller_ids.filtered(lambda r: r.name.id == line.request_id.partner_id.id)
-    #         if supplier_info:
-    #             line.price_unit = supplier_info[0].price
-    #         else:
-    #             line.price_unit = 0.0
+ 
