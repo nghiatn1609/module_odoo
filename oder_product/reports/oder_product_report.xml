@@ -1,0 +1,11 @@
+<odoo>
+    <report
+        id="report_session"
+        model="purchase.request.line"
+        string="Order Product Line"
+        name="oder_product.report_order_product_line"
+        file="oder_product.report_order_product_line"
+        report_type="qweb-pdf"
+        attachment = "True"
+    />
+</odoo>
