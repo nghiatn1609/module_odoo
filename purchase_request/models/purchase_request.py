@@ -4,7 +4,7 @@ from odoo import models, fields, api
 import xlsxwriter
 
 
-class oder_product(models.Model):
+class purchase_request(models.Model):
     _name = 'purchase.request'
     _description = 'Yêu cầu mua hàng'
 
@@ -31,16 +31,16 @@ class oder_product(models.Model):
         print("Gửi yêu cầu")
     
     def export_to_excel(self):
-        # Create a new Excel workbook and add a worksheet
+        # Tạo file excel mới và sheet mới
         workbook = xlsxwriter.Workbook('purchase_requests_1.xlsx')
         worksheet = workbook.add_worksheet()
 
-        # Write the headers
+        # Tạo tiêu đề
         headers = ['Request ID', 'Product ID', 'Quantity', 'Total Price']
         for col, header in enumerate(headers):
             worksheet.write(0, col, header)
 
-        # Write the data rows
+        # Viết theo dòng
         row = 1
         for request in self.filtered(lambda r: r.state == 'approve'):
             for line in request.request_line_ids:
@@ -50,7 +50,7 @@ class oder_product(models.Model):
                 worksheet.write(row, 3, line.total)
                 row += 1
 
-        # Close the workbook
+        # Đóng file
         workbook.close()
     
     
@@ -70,7 +70,7 @@ class oder_product(models.Model):
     def create(self, vals):
         if vals.get('name', 'New') == 'New':
             vals['name'] = self.env['ir.sequence'].next_by_code('purchase.request') or '/'
-        return super(oder_product, self).create(vals)
+        return super(purchase_request, self).create(vals)
     
     
     
