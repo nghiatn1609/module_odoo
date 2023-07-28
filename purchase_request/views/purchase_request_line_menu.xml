@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+     <!-- Top menu item -->
+
+    <!-- <menuitem name="Oder Product" id="oder_product.menu_root"/> -->
+
+    <!-- menu categories -->
+
+    <menuitem name="Purchase Request Line" id="purchase_request.purchase_request_line_1" parent="purchase_request.menu_root"/>
+
+    <!-- actions -->
+
+    <menuitem name="Purchase Request Line List" id="purchase_request.purchase_request_line_list" parent="purchase_request.purchase_request_line_1"
+              action="purchase_request_line"/>
+
+
+
+</data>
+</odoo>

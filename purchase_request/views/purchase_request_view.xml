@@ -1,0 +1,71 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="purchase_request.tree">
+      <field name="name">Purchase Request list</field>
+      <field name="model">purchase.request</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="department_id" readonly="1"/>
+          <field name="request_id" readonly="1"/>
+          <field name="approver_id" readonly="1"/>
+          <field name="date"/>
+          <field name="description"/>
+          <field name="total_qty"/>
+          <field name="total_amount"/>
+          <field name="state" position="before" widget="statusbar"/>
+        </tree>
+      </field>
+    </record>
+    <record id="purchase_request.form" model="ir.ui.view">
+      <field name="name">Purchase Request form</field>
+      <field name="model">purchase.request</field>
+      <field name="arch" type="xml">
+        <form string="Purchase Request Form">
+          <header>
+            <button string="Gửi yêu cầu" type="object" name="action_send_request"
+                        class="oe_highlight" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+            <!-- Các trường khác trong header -->
+            <field name="state" position="attributes" widget="statusbar" />
+          </header>
+          <sheet>
+            <group>
+              <group name="name_1" string="Name">
+                <field name="name"/>
+              </group>
+              <group name="name_2" >
+                <field name="request_id" />
+                <field name="department_id" />
+              </group>
+              <group name="name_5">
+                <field name="approver_id" />
+                <field name="description"/>
+              </group>
+              <group name="name_4">
+                <field name="date"/>
+                <field name="total_qty"/>
+                <field name="total_amount"/>
+              </group>
+              <notebook>
+                <page name="name_6" string="Order">
+                  <field name="request_line_ids" />
+                </page>
+              </notebook>
+            </group>
+          </sheet>
+          <footer>
+            <button string="Export to Excel" type="object" name="export_to_excel" class="oe_highlight"
+                            attrs="{'invisible': [('state', '!=', 'approve')]}"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="purchase_request_list">
+      <field name="name">Purchase Request</field>
+      <field name="res_model">purchase.request</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+  </data>
+</odoo>
