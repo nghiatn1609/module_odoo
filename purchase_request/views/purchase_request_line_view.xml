@@ -9,7 +9,6 @@
                     <field name="request_id"/>
                     <field name="product_id"/>
                     <field name="uom_id"/>
-                    <!-- <field name="price_unit"/> -->
                     <field name="qty"/>
                     <field name="qty_approve"/>
                     <field name="total"/>
