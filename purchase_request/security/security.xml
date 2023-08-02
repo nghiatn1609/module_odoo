@@ -47,6 +47,6 @@
         <field name="perm_write" eval="1"/>
         <field name="perm_create" eval="1"/>
         <field name="perm_unlink" eval="0"/>
-        <field name="domain_force">[('request_id.state', '=', 'wait')]</field>
+        <field name="domain_force">[('request_id.state', '=', 'draft')]</field>
     </record>
 </odoo>
