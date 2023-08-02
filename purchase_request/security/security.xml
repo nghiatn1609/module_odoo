@@ -1,73 +1,52 @@
 <odoo>
-    <!-- Chỉ được xóa bản ghi Draft -->
+    <!-- Record Rule Group can see-->
+    <record id="only_modify_user_line" model="ir.rule">
+        <field name="name">Only Responsible can see</field>
+        <field name="model_id" ref="model_purchase_request"/>
+        <field name="groups" eval="[(4, ref('purchase_request.group_purchase_request_user')), (4, ref('purchase_request.group_purchase_request_manager'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+        <field name="domain_force"> [('request_id','=',user.id)] </field>
+    </record>
+
+   <!-- Chỉ được xóa bản ghi Draft -->
     <record id="state_draft" model="ir.rule">
         <field name="name">Only Draft state can delete</field>
         <field name="model_id" ref="model_purchase_request"/>
-        <field name="groups" eval="[(6,0, [ref('base.group_user')])]"/>
+        <field name="groups" eval="[(4, ref('purchase_request.group_purchase_request_user')), (4, ref('purchase_request.group_purchase_request_manager'))]"/>
         <field name="domain_force"> [('state','=','draft')] </field>
         <!-- Có thể đọc -->
-        <field name="perm_read" eval="1"/>
+        <field name="perm_read" eval="0"/>
         <field name="perm_write" eval="0"/>
         <!-- Có thể create -->
-        <field name="perm_create" eval="1"/>
+        <field name="perm_create" eval="0"/>
         <!-- Không thể xóa -->
         <field name="perm_unlink" eval="1"/>
     </record>
 
-    <record id="state_draft_no_can" model="ir.rule">
-        <field name="name">Only Draft state can delete or create</field>
-        <field name="model_id" ref="model_purchase_request"/>
-        <field name="groups" eval="[(6,0, [ref('base.group_user')])]"/>
-        <field name="domain_force"> ['!',('state','=','draft')] </field>
-        <!-- Có thể đọc -->
-        <!-- <field name="perm_read" eval="1"/> -->
-        <field name="perm_write" eval="0"/>
-        <!-- Có thể create -->
-        <field name="perm_create" eval="0"/>
-        <!-- Không thể xóa -->
-        <field name="perm_unlink" eval="0"/>
-    </record>
     <!-- có thể sửa Qty Approve khi đang ở state wait-->
     <record model="ir.rule" id="rule_purchase_request_edit_qty_approve">
-        <field name="name">Allow Editing qty_approve in Wait State</field>
+        <field name="name">Only Wait State can create and edit Order line</field>
         <field name="model_id" ref="model_purchase_request_line"/>
-        <field name="groups" eval="[(6,0, [ref('base.group_user')])]"/>
-        <field name="perm_read" eval="1"/>
-        <field name="perm_write" eval="0"/>
-        <field name="perm_create" eval="1"/>
-        <field name="perm_unlink" eval="1"/>
-        <field name="domain_force">['!',('request_id.state', '=', 'wait')]</field>
-    </record>
-    <record model="ir.rule" id="rule_purchase_request_edit">
-        <field name="name">Allow Editing qty_approve in Wait State</field>
-        <field name="model_id" ref="model_purchase_request_line"/>
-        <field name="groups" eval="[(6,0, [ref('base.group_user')])]"/>
-        <!-- <field name="perm_read" eval="1"/> -->
+        <field name="groups" eval="[(4, ref('purchase_request.group_purchase_request_user')), (4, ref('purchase_request.group_purchase_request_manager'))]"/>
+        <field name="perm_read" eval="0"/>
         <field name="perm_write" eval="1"/>
         <field name="perm_create" eval="1"/>
-        <!-- <field name="perm_unlink" eval="1"/> -->
+        <field name="perm_unlink" eval="0"/>
         <field name="domain_force">[('request_id.state', '=', 'wait')]</field>
     </record>
-    <!-- <record model="ir.rule" id="rule_purchase_request_line_create">
-        <field name="name">Only Draft State can create</field>
+
+    <!-- có thể thêm Chi tiết yêu cầu mua hàng khi đang ở state draft-->
+    <record model="ir.rule" id="rule_purchase_request_edit_record_line">
+        <field name="name">Only Draft State can create and edit Order line</field>
         <field name="model_id" ref="model_purchase_request_line"/>
-        <field name="groups" eval="[(6,0, [ref('base.group_user')])]"/>
-        <field name="domain_force"> ['!',('state','=','draft')] </field>
-        <field name="perm_read" eval="1"/>
+        <field name="groups" eval="[(4, ref('purchase_request.group_purchase_request_user')), (4, ref('purchase_request.group_purchase_request_manager'))]"/>
+        <field name="perm_read" eval="0"/>
         <field name="perm_write" eval="1"/>
-        <field name="perm_create" eval="0"/>
+        <field name="perm_create" eval="1"/>
         <field name="perm_unlink" eval="0"/>
-    </record> -->
-    <!-- <record model="ir.rule" id="rule_purchase_request_line_no_create">
-        <field name="name">Only Draft State can create</field>
-        <field name="model_id" ref="model_purchase_request_line"/>
-        <field name="groups" eval="[(6,0, [ref('base.group_user')])]"/>
-        <field name="domain_force"> ['!',('state','=','draft')] </field>
-        <field name="perm_read" eval="1"/>
-        <field name="perm_write" eval="0"/>
-        
-        <field name="perm_create" eval="0"/>
-        
-        <field name="perm_unlink" eval="0"/>
-    </record> -->
+        <field name="domain_force">[('request_id.state', '=', 'wait')]</field>
+    </record>
 </odoo>

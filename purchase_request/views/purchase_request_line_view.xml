@@ -5,17 +5,36 @@
             <field name="name">Purchase Request Line list</field>
             <field name="model">purchase.request.line</field>
             <field name="arch" type="xml">
-                <tree>
+                <tree delete="0" edit="0">
                     <field name="request_id"/>
                     <field name="product_id"/>
                     <field name="uom_id"/>
+                    <field name="price_unit"/>
                     <field name="qty"/>
                     <field name="qty_approve"/>
                     <field name="total"/>
                 </tree>
             </field>
         </record>
-
+        <record id="purchase_request.line_form" model="ir.ui.view">
+            <field name="name">Purchase Request Line Form</field>
+            <field name="model">purchase.request.line</field>
+            <field name="arch" type="xml">
+                <form string="Purchase Request Line" delete="0" edit="0">
+                    <sheet>
+                        <group>
+                            <field name="request_id"/>
+                            <field name="product_id"/>
+                            <field name="uom_id"/>
+                            <field name="price_unit"/>
+                            <field name="qty"/>
+                            <field name="qty_approve"/>
+                            <field name="total"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
         <!-- actions opening views on models -->
         <record model="ir.actions.act_window" id="purchase_request_line">
             <field name="name">Purchase Request Line</field>

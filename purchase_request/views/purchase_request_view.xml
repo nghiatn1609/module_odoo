@@ -27,7 +27,14 @@
             <button string="Gửi yêu cầu" type="object" name="action_send_request"
                         class="oe_highlight" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
             <!-- Các trường khác trong header -->
-            <field name="state" position="attributes" widget="statusbar" />
+            <button name="action_return" string="Return" type="object" groups="purchase_request.group_purchase_request_user" class="btn-primary" attrs="{'invisible': [('state', '!=', 'wait')]} "/>
+            <button name="action_approve" string="Approve" type="object" groups="purchase_request.group_purchase_request_manager" class="btn-primary" attrs="{'invisible': [('state', '!=', 'wait')]}"/>
+            <button name="action_reject" string="Reject" type="object" groups="purchase_request.group_purchase_request_manager" class="btn-danger" attrs="{'invisible': [('state', '!=', 'wait')]}"/>
+            <button name="action_confirm_reject" string="Confirm Reject" type="object" class="btn-danger" attrs="{'invisible': [('state', '!=', 'cancel')]}"/>
+            <!-- <field name="state" position="attributes" widget="statusbar" clickable="1" /> -->
+            <field name="state" widget="statusbar" clickable="1" statusbar_visible="draft,wait,approve,cancel"
+                        attrs="{'readonly': [('state', '!=', 'drafts')]}"
+                        />
           </header>
           <sheet>
             <group>
@@ -46,18 +53,36 @@
                 <field name="date"/>
                 <field name="total_qty"/>
                 <field name="total_amount"/>
+                <!-- <field name="state" widget="statusbar"/> -->
               </group>
-              <notebook>
-                <page name="name_6" string="Order">
-                  <field name="request_line_ids" />
-                </page>
-              </notebook>
             </group>
+            <notebook>
+              <page name="name_6" string="Order">
+                <field name="request_line_ids" />
+              </page>
+            </notebook>
           </sheet>
           <footer>
             <button string="Export to Excel" type="object" name="export_to_excel" class="oe_highlight"
                             attrs="{'invisible': [('state', '!=', 'approve')]}"/>
           </footer>
+        </form>
+      </field>
+    </record>
+    <!-- Reject Reason form -->
+    <record model="ir.ui.view" id="view_reject_reason_form">
+      <field name="name">Reject Reason Form</field>
+      <field name="model">purchase.request</field>
+      <field name="arch" type="xml">
+        <form edit="1">
+          <sheet>
+            <group>
+              <field name="reason_rejection" required="1"/>
+            </group>
+            <footer>
+              <button name="action_confirm_reject" string="Confirm Reject" type="object" class="btn-danger"/>
+            </footer>
+          </sheet>
         </form>
       </field>
     </record>
