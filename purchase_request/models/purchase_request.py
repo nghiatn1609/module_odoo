@@ -31,9 +31,6 @@ class purchase_request(models.Model):
     total_amount = fields.Float(string="Total Amount", compute ="_get_total_amount", store=True)
     reason_rejection = fields.Text(string='Reason for Rejection')
 
-     # Add a boolean field to track if the record is in 'Edit' state
-    is_editing = fields.Boolean(string='Is Editing', compute='_compute_is_editing')
-
     
 
     def action_send_request(self):
@@ -117,7 +114,3 @@ class purchase_request(models.Model):
         return super(purchase_request, self).create(vals)
     
     
-    @api.depends('state')
-    def _compute_is_editing(self):
-        for record in self:
-            record.is_editing = record.state == 'draft'
