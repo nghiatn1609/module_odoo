@@ -33,7 +33,7 @@
             <button name="action_confirm_reject" string="Confirm Reject" type="object" class="btn-danger" attrs="{'invisible': [('state', '!=', 'cancel')]}"/>
             <!-- <field name="state" position="attributes" widget="statusbar" clickable="1" /> -->
             <field name="state" widget="statusbar" clickable="1" statusbar_visible="draft,wait,approve,cancel"
-                       attrs="{'readonly': 1}" />
+                        attrs="{'readonly': 1}" />
           </header>
           <sheet>
             <group>
