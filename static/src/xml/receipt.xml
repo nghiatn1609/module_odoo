@@ -1,0 +1,90 @@
+<templates id="template" xml:space="preserve">
+    <t t-name="OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension">
+        <xpath expr="//div[@class='before-footer']" position="before">
+            <t t-if="receipt.is_get_invoice">
+                <div style="padding: 5px 0px 5px 0px;text-align: center;">THÔNG TIN HÓA ĐƠN ĐIỆN TỬ</div>
+                <div style="width: 100%;font-size:13px;font-family: Arial, Helvetica, sans-serif;" class="table table-bordered">
+
+                    <!-- Kiểm tra xem có phải khách hàng cá nhân hay không -->
+                    <t t-if="receipt.sinvoice_customer_name">
+                        <!-- Hiển thị thông tin khách hàng cá nhân -->
+                        <div style="float:left; width:100%">
+                            <div style="font-weight: bold;float:left;margin-right: 5px;">Họ và tên:</div>
+                            <div style="float:left">
+                                <t t-esc="receipt.sinvoice_customer_name || ''"/>
+                            </div>
+                        </div>
+                        <div style="float:left; width:100%">
+                            <div style="font-weight: bold;float:left;margin-right: 5px;">Email:</div>
+                            <div style="float:left">
+                                <t t-esc="receipt.sinvoice_customer_email || ''"/>
+                            </div>
+                        </div>
+                        <div style="float:left; width:100%">
+                            <div style="font-weight: bold;float:left;margin-right: 5px;">Địa chỉ:</div>
+                            <div style="float:left">
+                                <t t-esc="receipt.sinvoice_customer_address || ''"/>
+                            </div>
+                        </div>
+                        <div style="float:left; width:100%">
+                            <div style="font-weight: bold;float:left;margin-right: 5px;">CCCD/MSTCN:</div>
+                            <div style="float:left">
+                                <t t-esc="receipt.sinvoice_customer_id || ''"/>
+                            </div>
+                        </div>
+                    </t>
+
+                    <t t-else="">
+                        <!-- Hiển thị thông tin khách hàng công ty -->
+                        <div style="float:left; width:100%">
+                            <div style="font-weight: bold;float:left;margin-right: 5px;">Tên đơn vị:</div>
+                            <div style="float:left">
+                                <t t-if="receipt.is_get_invoice">
+                                    <t t-esc="receipt.sinvoice_company_name || ''"/>
+                                </t>
+                                <t t-else="">
+                                    Khách lẻ không lấy hóa đơn
+                                </t>
+                            </div>
+                        </div>
+                        <div style="float:left; width:100%">
+                            <div style="font-weight: bold;float:left;margin-right: 5px;">Mã số thuế:</div>
+                            <div style="float:left">
+                                <t t-esc="receipt.sinvoice_vat || ''"/>
+                            </div>
+                        </div>
+                        <div style="float:left; width:100%">
+                            <div style="font-weight: bold;float:left;margin-right: 5px;">Email:</div>
+                            <div style="float:left">
+                                <t t-esc="receipt.sinvoice_email || ''"/>
+                            </div>
+                        </div>
+                        <div style="float:left; width:100%">
+                            <div style="font-weight: bold;float:left;margin-right: 5px;">Địa chỉ:</div>
+                            <div style="float:left">
+                                <t t-esc="receipt.sinvoice_address || ''"/>
+                            </div>
+                        </div>
+                    </t>
+
+                    <!-- Thông tin chung cho cả hai loại khách hàng -->
+                    <div style="float:left; width:100%">
+                        <div style="font-weight: bold;float:left;margin-right: 5px;">Tra cứu tại:</div>
+                        <div style="float:left">
+                            <t t-esc='receipt.company.sinvoice_search_url'/>
+                        </div>
+                    </div>
+                    <div style="float:left; width:100%">
+                        <div style="font-weight: bold;float:left;margin-right: 5px;">Mã tra cứu:</div>
+                        <div style="float:left">
+                            <t t-esc='receipt.name'/>
+                        </div>
+                    </div>
+                </div>
+                <div style="float:left; text-align: center; font-size: 13px; margin: 10px 0px 5px 0px; ">
+                    Hóa đơn điện tử sẽ được xuất tự động trong ngày, Quý khách có thể tra cứu thông tin hóa đơn điện tử sau 24H từ thời điểm mua hàng
+                </div>
+            </t>
+        </xpath>
+    </t>
+</templates>

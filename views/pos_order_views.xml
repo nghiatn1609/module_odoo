@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="pos_order_view_sinvoice_inherit" model="ir.ui.view">
+            <field name="name">pos_order_view_sinvoice_inherit</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <page name="extra" position="after">
+                        <page name="sinvoice_info" string="SInvoice Info">
+                            <form>
+                                <group>
+                                    <group>
+                                        <field name="sinvoice_id" readonly="1"/>
+                                        <field name="sinvoice_no" readonly="1"/>
+                                        <field name="sinvoice_series" readonly="1"/>
+                                        <field name="sinvoice_issued_date" readonly="1"/>
+                                        <field name="sinvoice_state" readonly="1"/>
+                                        <field name="sinvoice_buyer_get_invoice" attrs="{'readonly': [('sinvoice_state', '=', 'released')]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="sinvoice_lot_id" readonly="1"/>
+                                        <field name="sinvoice_customer_type" readonly="1"/>
+                                        <field name="sinvoice_customer_name"
+                                               attrs="{'invisible': [('sinvoice_customer_type', '!=', 'personal')], 'readonly': [('sinvoice_state', '=', 'released')]}" />
+                                        <field name="sinvoice_customer_id"
+                                               attrs="{'invisible': [('sinvoice_customer_type', '!=', 'personal')], 'readonly': [('sinvoice_state', '=', 'released')]}" />
+                                        <field name="sinvoice_vat"
+                                               attrs="{'invisible': [('sinvoice_customer_type', '!=', 'company')], 'readonly': [('sinvoice_state', '=', 'released')]}" />
+                                        <field name="sinvoice_company_name"
+                                               attrs="{'invisible': [('sinvoice_customer_type', '!=', 'company')], 'readonly': [('sinvoice_state', '=', 'released')]}" />
+                                        <field name="sinvoice_address" attrs="{'readonly': [('sinvoice_state', '=', 'released')]}"/>
+                                        <field name="sinvoice_email" attrs="{'readonly': [('sinvoice_state', '=', 'released')]}"/>
+                                    </group>
+                                </group>
+                            </form>
+                        </page>
+                    </page>
+                </data>
+<!--                 <xpath expr="//button[@name='action_print_order']" position="after">-->
+<!--                    <button name="action_api_adjust_sinvoice"-->
+<!--                            string="Điều chỉnh HDDT"-->
+<!--                            type="object"-->
+<!--                            class="btn"-->
+<!--                            attrs="{'invisible': [('x_pos_order_refund_id', '=', False)]}"-->
+<!--                            groups="account.group_account_user"-->
+<!--                    />-->
+<!--                </xpath>-->
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_pos_order_sinvoice_tree_inherit">
+            <field name="name">view_pos_order_sinvoice_tree_inherit</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_order_tree"/>
+            <field name="arch" type="xml">
+                <field name="state" position="after">
+                    <field name="sinvoice_buyer_get_invoice"/>
+                    <field name="sinvoice_state"/>
+                    <field name="sinvoice_vat"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="action_batch_confirm" model="ir.actions.server">
+            <field name="name">Phát hành HDDT</field>
+            <field name="state">code</field>
+            <field name="model_id" ref="point_of_sale.model_pos_order"/>
+            <field name="binding_model_id" ref="point_of_sale.model_pos_order"/>
+            <field name="binding_view_types">list</field>
+            <field name="code">
+                action = record.action_export_sinvoice()
+            </field>
+        </record>
+
+    </data>
+</odoo>

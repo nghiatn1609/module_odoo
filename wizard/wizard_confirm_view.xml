@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="wizard_confirm_form_view" model="ir.ui.view">
+            <field name="name">Batch Confirm</field>
+            <field name="model">wizard.confirm.export.einvoice</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <div>
+                            Bạn có muốn <b>"phát hành HDDT"</b> cho các đơn hàng đã chọn không
+                        </div>
+                    </group>
+                    <footer>
+                        <button name="button_confirm" type="object" string="Confirm" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

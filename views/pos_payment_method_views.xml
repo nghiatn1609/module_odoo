@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="pos_payment_method_view_form_inherit">
+			<field name="name">pos_payment_method_view_form_inherit</field>
+			<field name="model">pos.payment.method</field>
+			<field name="inherit_id" ref="point_of_sale.pos_payment_method_view_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='company_id']" position="before">
+                    <field name="is_auto_einvoice_issuance"/>
+				</xpath>
+			</field>
+		</record>
+    </data>
+</odoo>

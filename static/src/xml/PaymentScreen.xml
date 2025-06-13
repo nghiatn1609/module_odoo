@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="PaymentScreen" t-inherit="point_of_sale.PaymentScreenWidget" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('note')]" position="after">
+            <div style="width:640px; margin-top: 12; font-size: 15px; font-family: Arial">
+                <span class="label">Khách hàng lấy hoá đơn</span>
+                <input type="checkbox" name="x_buyer_get_invoice" id="x_buyer_get_invoice"/>
+                <br/>
+
+                <div id="x_sinvoice" style="display: none;margin-bottom: 10px;">
+                    <button class="js-get-buyer-info-sinvoice" style="font-size: 13px; padding: 10px; margin-top: 10px; margin-bottom: 10px; font-family: Arial;" type="button">Thông tin hóa đơn gần nhất</button>
+                    <button class="js-confirm-tax-code" style="font-size: 13px; padding: 10px; margin-top: 10px; margin-bottom: 10px; font-family: Arial; margin-left: 10px;" type="button">Kiểm tra mã số thuế</button>
+
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th style="font-weight: normal; padding-right: 5px;">Loại khách hàng</th>
+                                <th>
+                                    <select style="width:500px" name="x_sinvoice_customer_type" id="x_sinvoice_customer_type">
+                                        <option value="personal" selected="selected">Cá nhân</option>
+                                        <option value="company">Công ty</option>
+                                    </select>
+                                </th>
+                            </tr>
+                            <!-- Fields for Personal Customer Type -->
+                            <tr class="personal-fields" style="display: none;">
+                                <th style="font-weight: normal; padding-right: 5px;">Họ và tên</th>
+                                <th>
+                                    <input style="width:500px" type="text" name="x_sinvoice_customer_name" id="x_sinvoice_customer_name" placeholder="Họ và tên..."/>
+                                </th>
+                            </tr>
+                            <tr class="personal-fields">
+                                <th style="font-weight: normal; padding-right: 5px;">Số điện thoại</th>
+                                <th>
+                                    <input style="width:500px" type="text" name="x_sinvoice_customer_phone" id="x_sinvoice_customer_phone"/>
+                                </th>
+                            </tr>
+                            <tr class="personal-fields" style="display: none;">
+                                <th style="font-weight: normal; padding-right: 5px;">CCCD/MSTCN</th>
+                                <th>
+                                    <input style="width:500px" type="text" name="x_sinvoice_customer_id" id="x_sinvoice_customer_id"/>
+                                </th>
+                            </tr>
+                            <tr class="personal-fields" style="display: none;">
+                                <th style="font-weight: normal; padding-right: 5px;">Email</th>
+                                <th>
+                                    <input style="width:500px" type="text" name="x_sinvoice_customer_email" id="x_sinvoice_customer_email"/>
+                                </th>
+                            </tr>
+                            <tr class="personal-fields" style="display: none;">
+                                <th style="font-weight: normal; padding-right: 5px;">Địa chỉ</th>
+                                <th>
+                                    <input style="width:500px" type="text" name="x_sinvoice_customer_address" id="x_sinvoice_customer_address"/>
+                                </th>
+                            </tr>
+                            <!-- Fields for Company Customer Type -->
+                            <tr class="company-fields">
+                                <th style="font-weight: normal; padding-right: 5px;">Mã số thuế</th>
+                                <th>
+                                    <input style="width:500px" type="text" name="x_sinvoice_vat" id="x_sinvoice_vat"/>
+                                </th>
+                            </tr>
+                            <tr class="company-fields">
+                                <th style="font-weight: normal; padding-right: 5px;">Tên công ty</th>
+                                <th>
+                                    <input style="width:500px" type="text" name="x_sinvoice_company_name" id="x_sinvoice_company_name"/>
+                                </th>
+                            </tr>
+                            <tr class="company-fields">
+                                <th style="font-weight: normal; padding-right: 5px;">Địa chỉ</th>
+                                <th>
+                                    <input style="width:500px" type="text" name="x_sinvoice_address" id="x_sinvoice_address"/>
+                                </th>
+                            </tr>
+                            <tr class="company-fields">
+                                <th style="font-weight: normal; padding-right: 5px;">Email</th>
+                                <th>
+                                    <input style="width:500px" type="text" name="x_sinvoice_email" id="x_sinvoice_email"/>
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </xpath>
+    </t>
+
+</templates>
